@@ -3,12 +3,14 @@ os: linux
 files:
   - source: /index.html
     destination: /var/www/html/
+permissions:
+  - object: /opt/codedeploy-agent/deployment-root/
+    pattern: "**/*.sh"
+    mode: 755
+    type:
+      - file
 hooks:
   BeforeInstall:
-    - location: /bin/chmod
-      timeout: 300
-      runas: root
-      command: ["chmod", "+x", "/opt/codedeploy-agent/deployment-root/*/*/deployment-archive/Scripts/*.sh"]
     - location: Scripts/install_nginx.sh
       timeout: 300
       runas: root
