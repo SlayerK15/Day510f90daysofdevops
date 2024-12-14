@@ -8,12 +8,14 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - cp -r scripts build/
       - cp index.html build/
+      - cp appspec.yml build/
   post_build:
     commands:
       - echo Build completed on `date`
 
 artifacts:
   files:
-    - index.html
+    - '**/*'
   base-directory: build
