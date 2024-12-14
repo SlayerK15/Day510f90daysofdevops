@@ -4,19 +4,28 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
+    commands:
+      - yum install -y nginx
   pre_build:
     commands:
       - echo Pre-build phase started on `date`
       - echo Installing nginx config...
+      - mkdir -p /usr/share/nginx/html/
   build:
     commands:
       - echo Build started on `date`
       - echo Copying web files...
+      - cp index.html /usr/share/nginx/html/
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Starting nginx...
+      - nginx -t
+      - service nginx start
 
 artifacts:
   files:
-    - index.html
-  discard-paths: no
+    - /usr/share/nginx/html/index.html
+    - appspec.yml
+  base-directory: /usr/share/nginx/html
+  name: web-artifact
