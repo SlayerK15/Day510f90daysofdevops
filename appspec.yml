@@ -5,6 +5,10 @@ files:
     destination: /var/www/html/
 hooks:
   BeforeInstall:
+    - location: /bin/chmod
+      timeout: 300
+      runas: root
+      command: ["chmod", "+x", "/opt/codedeploy-agent/deployment-root/*/*/deployment-archive/Scripts/*.sh"]
     - location: Scripts/install_nginx.sh
       timeout: 300
       runas: root
