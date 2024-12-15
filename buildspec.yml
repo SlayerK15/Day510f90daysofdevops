@@ -1,5 +1,4 @@
 version: 0.2
-
 phases:
   pre_build:
     commands:
@@ -12,10 +11,10 @@ phases:
       - cp index.html build/
       - cp appspec.yml build/
       - cp nginx.conf build/
+      - chmod +x build/Scripts/*.sh  # Make shell scripts executable
   post_build:
     commands:
       - echo Build completed on `date`
-
 artifacts:
   files:
     - '**/*'
