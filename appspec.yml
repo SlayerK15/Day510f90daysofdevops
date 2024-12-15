@@ -3,12 +3,6 @@ os: linux
 files:
   - source: /index.html
     destination: /var/www/html/
-permissions:
-  - object: /opt/codedeploy-agent/deployment-root/
-    pattern: "**/*.sh"
-    mode: 755
-    type:
-      - file
 hooks:
   BeforeInstall:
     - location: Scripts/install_nginx.sh
